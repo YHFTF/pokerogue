@@ -21,7 +21,7 @@ export class Egg {
 
   constructor(id: integer, gachaType: GachaType, hatchWaves: integer, timestamp: integer) {
     this.id = id;
-    this.tier = Math.floor(id / EGG_SEED); 
+    this.tier = Math.floor(id / EGG_SEED);
     this.gachaType = gachaType;
     this.hatchWaves = hatchWaves;
     this.timestamp = timestamp;
