@@ -1232,7 +1232,7 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
    * @param thresholdOverride number that is divided by 2^16 (65536) to get the shiny chance
    * @returns true if the Pokemon has been set as a shiny, false otherwise
    */
-  trySetShiny(thresholdOverride?: integer): boolean {
+  trySetShiny(thresholdOverride?: integer): boolean { //이로치 결정 부분
     // Shiny Pokemon should not spawn in the end biome in endless
     if (this.scene.gameMode.isEndless && this.scene.arena.biomeType === Biome.END) {
       return false;
@@ -1244,7 +1244,7 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
     const E = this.scene.gameData.trainerId ^ this.scene.gameData.secretId;
     const F = rand1 ^ rand2;
 
-    const shinyThreshold = new Utils.IntegerHolder(32);
+    const shinyThreshold = new Utils.IntegerHolder(8);//Utils.IntegerHolder(32)값이 낮아질 수록 그만큼 확률 증가 8인 현재 4배증가 
     if (thresholdOverride === undefined) {
       if (!this.hasTrainer()) {
         this.scene.applyModifiers(ShinyRateBoosterModifier, true, shinyThreshold);
@@ -1254,7 +1254,7 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
     }
 
     this.shiny = (E ^ F) < shinyThreshold.value;
-    if ((E ^ F) < 32) {
+    if ((E ^ F) < 8) {
       console.log("REAL SHINY!!");
     }
 

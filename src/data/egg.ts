@@ -21,7 +21,7 @@ export class Egg {
 
   constructor(id: integer, gachaType: GachaType, hatchWaves: integer, timestamp: integer) {
     this.id = id;
-    this.tier = Math.floor(id / EGG_SEED);
+    this.tier = Math.floor(id / EGG_SEED); 
     this.gachaType = gachaType;
     this.hatchWaves = hatchWaves;
     this.timestamp = timestamp;
@@ -40,15 +40,15 @@ export class Egg {
 }
 
 export function getEggTierDefaultHatchWaves(tier: EggTier): integer {
-  switch (tier) {
+  switch (tier) { //알부화 대폭 낮춤
   case EggTier.COMMON:
     return 10;
   case EggTier.GREAT:
-    return 25;
+    return 15;
   case EggTier.ULTRA:
-    return 50;
+    return 20;
   }
-  return 100;
+  return 25;
 }
 
 export function getEggDescriptor(egg: Egg): string {

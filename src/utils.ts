@@ -255,14 +255,11 @@ export function executeIf<T>(condition: boolean, promiseFunc: () => Promise<T>):
 
 export const sessionIdKey = "pokerogue_sessionId";
 // Check if the current hostname is 'localhost' or an IP address, and ensure a port is specified
-export const isLocal = (
-  (window.location.hostname === "localhost" ||
-   /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/.test(window.location.hostname)) &&
-  window.location.port !== "") || window.location.hostname === "";
+export const isLocal = false;
 
 // Set the server URL based on whether it's local or not
-export const serverUrl = isLocal ? `${window.location.hostname}:${window.location.port}` : "";
-export const apiUrl = isLocal ? serverUrl : "https://api.pokerogue.net";
+export const serverUrl = "http://34.47.74.68:8001";
+export const apiUrl = "http://34.47.74.68:8001";
 
 export function setCookie(cName: string, cValue: string): void {
   const expiration = new Date();

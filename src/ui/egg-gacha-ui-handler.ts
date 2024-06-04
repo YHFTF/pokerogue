@@ -369,7 +369,7 @@ export default class EggGachaUiHandler extends MessageUiHandler {
     if (!eggs) {
       eggs = [];
       const tierValueOffset = this.gachaCursor === GachaType.LEGENDARY ? 1 : 0;
-      const tiers = new Array(pullCount).fill(null).map(() => {
+      const tiers = new Array(pullCount).fill(null).map(() => { //알이나올확률 조정
         const tierValue = Utils.randInt(256);
         return tierValue >= 52 + tierValueOffset ? EggTier.COMMON : tierValue >= 8 + tierValueOffset ? EggTier.GREAT : tierValue >= 1 + tierValueOffset ? EggTier.ULTRA : EggTier.MASTER;
       });
