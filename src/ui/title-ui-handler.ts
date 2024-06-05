@@ -11,6 +11,7 @@ export default class TitleUiHandler extends OptionSelectUiHandler {
   private titleContainer: Phaser.GameObjects.Container;
   private dailyRunScoreboard: DailyRunScoreboard;
   private playerCountLabel: Phaser.GameObjects.Text;
+  private customLabel: Phaser.GameObjects.Text; //커스텀 레이블
   private splashMessage: string;
   private splashMessageText: Phaser.GameObjects.Text;
 
@@ -41,6 +42,30 @@ export default class TitleUiHandler extends OptionSelectUiHandler {
     this.playerCountLabel = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 2, (this.scene.game.canvas.height / 6) - 109, `? ${i18next.t("menu:playersOnline")}`, TextStyle.MESSAGE, { fontSize: "54px" });
     this.playerCountLabel.setOrigin(1, 0);
     this.titleContainer.add(this.playerCountLabel);
+
+    //커스텀 레이블은 plyaerCountLabel 바로 위에 위치
+    this.customLabel = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 2, (this.scene.game.canvas.height / 6) - 118, "박영현 Github방문", TextStyle.MONEY, { fontSize: "54px" });
+    this.customLabel.setOrigin(1, 0);
+    this.customLabel;
+    this.customLabel.setInteractive()
+      .on("pointerover", function () {
+        this.setStyle({ color:"red" });
+      }, this.customLabel)
+      .on("pointerout", function () {
+        this.setStyle({ color:"white" });
+      }, this.customLabel)
+      .on("pointerdown", function () {
+        top.location.href = "https://github.com/YHFTF/pokerogue";
+      });
+    this.titleContainer.add(this.customLabel);
+    this.scene.tweens.add({
+      targets: this.customLabel,
+      duration: Utils.fixedInt(900),
+      scale: this.customLabel.scale * 1.1,
+      loop: -1,
+      yoyo: true,
+    });
+    //커스텀 레이블 끝
 
     this.splashMessageText = addTextObject(this.scene, logo.x + 64, logo.y + logo.displayHeight - 8, "", TextStyle.MONEY, { fontSize: "54px" });
     this.splashMessageText.setOrigin(0.5, 0.5);
