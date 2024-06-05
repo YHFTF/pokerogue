@@ -54,8 +54,8 @@ export default class TitleUiHandler extends OptionSelectUiHandler {
       .on("pointerout", function () {
         this.setStyle({ color:"#f89890" });
       }, this.customLabel)
-      .on("pointerdown", function () {
-        top.location.href = "https://github.com/YHFTF/pokerogue";
+      .on("pointerdown", function () {//클릭시 새창으로 git주소 열림
+        window.open("https://github.com/YHFTF/pokerogue", "_blank");
       });
     this.titleContainer.add(this.customLabel);
     this.scene.tweens.add({

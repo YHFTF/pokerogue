@@ -1244,7 +1244,7 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
     const E = this.scene.gameData.trainerId ^ this.scene.gameData.secretId;
     const F = rand1 ^ rand2;
 
-    const shinyThreshold = new Utils.IntegerHolder(8);  //Utils.IntegerHolder(32)값이 낮아질 수록 그만큼 확률 증가 8인 현재 4배증가
+    const shinyThreshold = new Utils.IntegerHolder(655);
     if (thresholdOverride === undefined) {
       if (!this.hasTrainer()) {
         this.scene.applyModifiers(ShinyRateBoosterModifier, true, shinyThreshold);
@@ -1254,7 +1254,7 @@ export default abstract class Pokemon extends Phaser.GameObjects.Container {
     }
 
     this.shiny = (E ^ F) < shinyThreshold.value;
-    if ((E ^ F) < 8) {
+    if ((E ^ F) < 655) { //이로치 확률 655/65536 = 1/100 = 1%
       console.log("REAL SHINY!!");
     }
 
