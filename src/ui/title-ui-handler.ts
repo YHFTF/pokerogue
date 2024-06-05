@@ -44,15 +44,15 @@ export default class TitleUiHandler extends OptionSelectUiHandler {
     this.titleContainer.add(this.playerCountLabel);
 
     //커스텀 레이블은 plyaerCountLabel 바로 위에 위치
-    this.customLabel = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 2, (this.scene.game.canvas.height / 6) - 118, "박영현 Github방문", TextStyle.MONEY, { fontSize: "54px" });
-    this.customLabel.setOrigin(1, 0);
+    this.customLabel = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 28, (this.scene.game.canvas.height / 6) - 113, "박영현 Github방문", TextStyle.SUMMARY_PINK, { fontSize: "54px" });
+    this.customLabel.setOrigin(0.5, 0.5);
     this.customLabel;
     this.customLabel.setInteractive()
       .on("pointerover", function () {
-        this.setStyle({ color:"red" });
+        this.setStyle({ color:"green" });
       }, this.customLabel)
       .on("pointerout", function () {
-        this.setStyle({ color:"white" });
+        this.setStyle({ color:"#f89890" });
       }, this.customLabel)
       .on("pointerdown", function () {
         top.location.href = "https://github.com/YHFTF/pokerogue";
