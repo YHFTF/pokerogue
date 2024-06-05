@@ -14,7 +14,8 @@ interface RankingEntry {
 // Don't forget to update translations when adding a new category
 enum ScoreboardCategory {
   DAILY,
-  WEEKLY
+  WEEKLY,
+  NOTICE
 }
 
 export class DailyRunScoreboard extends Phaser.GameObjects.Container {
@@ -32,12 +33,14 @@ export class DailyRunScoreboard extends Phaser.GameObjects.Container {
   private category: ScoreboardCategory;
 
   private _isUpdating: boolean;
+  private notice: string;
 
   constructor(scene: BattleScene, x: number, y: number) {
     super(scene, x, y);
 
     this._isUpdating = false;
     this.setup();
+    this.notice = "공지사항";
   }
 
   /**
@@ -48,6 +51,9 @@ export class DailyRunScoreboard extends Phaser.GameObjects.Container {
   set isUpdating(value) {
     this._isUpdating = value;
     this.setButtonsState(!value);
+  }
+  updateNotice(newNotice: string) {
+    this.notice = newNotice;
   }
 
   /**
@@ -125,7 +131,7 @@ export class DailyRunScoreboard extends Phaser.GameObjects.Container {
     this.add(this.loadingLabel);
 
     this.page = 1;
-    this.category = ScoreboardCategory.DAILY;
+    this.category = ScoreboardCategory.NOTICE;
   }
 
   updateRankings(rankings: RankingEntry[]) {
@@ -188,6 +194,27 @@ export class DailyRunScoreboard extends Phaser.GameObjects.Container {
 
     if (category !== this.category) {
       this.page = page = 1;
+    }
+
+    if (category === ScoreboardCategory.NOTICE) {
+      // 공지사항을 표시하는 코드...
+      this.page = page;
+      this.category = category;
+      this.titleLabel.setText(this.notice);
+      this.loadingLabel
+        .setText(
+          "24.06.05 기준 최신화 완료\n\n\n" +
+        "업데이트 내용\n\n" +
+        "1. 알부화 천장 추가\n" +
+        "2. 소소한 버그 수정\n" +
+        "3. 공지사항 탭 추가\n" +
+        "4. 오늘은 진짜로 컴퓨터구조 공부해야겠다\n" +
+        "5. 수업 가야돼..."
+        )
+        .setFontSize("48px")
+        .setVisible(true);
+      this.isUpdating = false;
+      return;
     }
 
     Utils.executeIf(category !== this.category || this.pageCount === undefined,
