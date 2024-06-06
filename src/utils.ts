@@ -282,8 +282,22 @@ export function getCookie(cName: string): string {
   return "";
 }
 
+/**
+ * When locally running the game, "pings" the local server
+ * with a GET request to verify if a server is running,
+ * sets isLocalServerConnected based on results
+ */
+export function localPing() {
+  if (isLocal) {
+    apiFetch("game/titlestats")
+      .then(resolved => isLocalServerConnected = true,
+        rejected => isLocalServerConnected = false
+      );
+  }
+}
+
 export function apiFetch(path: string, authed: boolean = false): Promise<Response> {
-  return new Promise((resolve, reject) => {
+  return (isLocal && isLocalServerConnected) || !isLocal ? new Promise((resolve, reject) => {
     const request = {};
     if (authed) {
       const sId = getCookie(sessionIdKey);
@@ -294,11 +308,11 @@ export function apiFetch(path: string, authed: boolean = false): Promise<Respons
     fetch(`${apiUrl}/${path}`, request)
       .then(response => resolve(response))
       .catch(err => reject(err));
-  });
+  }) : new Promise(() => {});
 }
 
 export function apiPost(path: string, data?: any, contentType: string = "application/json", authed: boolean = false): Promise<Response> {
-  return new Promise((resolve, reject) => {
+  return (isLocal && isLocalServerConnected) || !isLocal ? new Promise((resolve, reject) => {
     const headers = {
       "Accept": contentType,
       "Content-Type": contentType,
@@ -312,7 +326,7 @@ export function apiPost(path: string, data?: any, contentType: string = "applica
     fetch(`${apiUrl}/${path}`, { method: "POST", headers: headers, body: data })
       .then(response => resolve(response))
       .catch(err => reject(err));
-  });
+  }) : new Promise(() => {});
 }
 
 export class BooleanHolder {
