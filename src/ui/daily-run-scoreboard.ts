@@ -203,13 +203,12 @@ export class DailyRunScoreboard extends Phaser.GameObjects.Container {
       this.titleLabel.setText(this.notice);
       this.loadingLabel
         .setText(
-          "24.06.05 기준 최신화 완료\n\n\n" +
+          "24.06.08 기준 최신화 완료\n\n\n" +
         "업데이트 내용\n\n" +
-        "1. 알부화 천장 추가\n" +
+        "1. 여러번역 업데이트\n" +
         "2. 소소한 버그 수정\n" +
-        "3. 공지사항 탭 추가\n" +
-        "4. 오늘은 진짜로 컴퓨터구조 공부해야겠다\n" +
-        "5. 수업 가야돼..."
+        "3. 챌린지 추가\n" +
+        "4. 집청소하는날~"
         )
         .setFontSize("48px")
         .setVisible(true);
