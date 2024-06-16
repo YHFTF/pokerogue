@@ -285,8 +285,8 @@ export const isLocal = false;
 export const localServerUrl = import.meta.env.VITE_SERVER_URL ?? `http://${window.location.hostname}:${window.location.port+1}`;
 
 // Set the server URL based on whether it's local or not
-export const serverUrl = "http://34.47.74.68:8001";
-export const apiUrl = "http://34.47.74.68:8001";
+export const serverUrl = "http://34.64.48.243:8001";
+export const apiUrl = "http://34.64.48.243:8001";
 export let isLocalServerConnected = true;
 
 
