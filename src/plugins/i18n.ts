@@ -44,6 +44,7 @@ export interface ModifierTypeTranslationEntries {
   ModifierType: { [key: string]: ModifierTypeTranslationEntry },
   AttackTypeBoosterItem: SimpleTranslationEntries,
   TempBattleStatBoosterItem: SimpleTranslationEntries,
+  TempBattleStatBoosterStatName: SimpleTranslationEntries,
   BaseStatBoosterItem: SimpleTranslationEntries,
   EvolutionItem: SimpleTranslationEntries,
   FormChangeItem: SimpleTranslationEntries,
@@ -89,8 +90,11 @@ export interface Localizable {
 }
 
 const fonts = [
-  new FontFace("emerald", "url(./fonts/PokePT_Wansung.ttf)"),
-  new FontFace("emerald", "url(./fonts/pokemon-emerald-pro.ttf"),
+  new FontFace("emerald", "url(./fonts/PokePT_Wansung.ttf)", { unicodeRange: "U+AC00-D7AC"}),
+  Object.assign(
+    new FontFace("pkmnems", "url(./fonts/PokePT_Wansung.ttf)", { unicodeRange: "U+AC00-D7AC"}),
+    { sizeAdjust: "133%" }
+  ),
 ];
 
 function initFonts() {
@@ -219,6 +223,7 @@ declare module "i18next" {
       tutorial: SimpleTranslationEntries;
       voucher: SimpleTranslationEntries;
       weather: SimpleTranslationEntries;
+      battleStat: SimpleTranslationEntries;
     };
   }
 }
